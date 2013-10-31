@@ -15,13 +15,11 @@ public class ListNoteActivity extends Activity {
 
 	private ListView mNoteListView;
 	private Button mAddNoteButton;
-	private DBHelper dbHelper;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_note);
-		
-		dbHelper = new DBHelper(this);
 		
 		final String[] names = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис",
 			      "Костя", "Игорь", "Анна", "Денис", "Андрей" };
