@@ -12,6 +12,9 @@ public final class R {
     }
     public static final class color {
         public static final int grey=0x7f040000;
+        public static final int list_background=0x7f040001;
+        public static final int list_row=0x7f040002;
+        public static final int list_row_select=0x7f040003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -20,21 +23,31 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int add_note_btn=0x7f020000;
+        public static final int add_note_pressed_btn=0x7f020001;
+        public static final int arrow=0x7f020002;
+        public static final int btn_add_note=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int note_add_btn=0x7f020005;
+        public static final int row_listing_states=0x7f020006;
+        public static final int separator_list=0x7f020007;
+        public static final int toolbar_background=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f090007;
+        public static final int action_settings=0x7f090008;
         public static final int addNoteButton=0x7f090000;
         public static final int captionTextView=0x7f090003;
         public static final int deleteNoteButton=0x7f090002;
         public static final int descriptionNoteEditText=0x7f090006;
         public static final int nameNoteEditText=0x7f090005;
         public static final int noteListView=0x7f090001;
+        public static final int note_listing_row_name_text_view=0x7f090007;
         public static final int saveNoteButton=0x7f090004;
     }
     public static final class layout {
         public static final int activity_list_note=0x7f030000;
         public static final int activity_note=0x7f030001;
+        public static final int note_listing_row=0x7f030002;
     }
     public static final class menu {
         public static final int note=0x7f080000;

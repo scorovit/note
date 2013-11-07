@@ -8,22 +8,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/grey" >
+        android:background="@drawable/toolbar_background" >
 
-        <Button
+        <ImageButton
             android:id="@+id/addNoteButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Button" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_add_note" />
 
     </RelativeLayout>
-
+    
     <ListView
         android:id="@+id/noteListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:background="@color/list_background"
+        android:divider="@drawable/separator_list"
+        android:drawSelectorOnTop="false"
+        android:scrollingCache="true" >
+
     </ListView>
 
 </LinearLayout>

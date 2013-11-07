@@ -100,17 +100,17 @@ public class SQLDataSourceNote {
 	/**
 	 * Get note from database.
 	 * 
-	 * @param name
+	 * @param id
 	 *            - unique identifier note
 	 * @return - note
 	 */
-	public Note getNote(String name) {
+	public Note getNote(String id) {
 		Note note = null;
 
 		try {
 			SQLiteDatabase db = openReadableDb();
 
-			Cursor cursor = db.query(true, TABLE_NAME, allNoteColumns, COLUMN_NAME + "=" + "'" + name + "'", null,
+			Cursor cursor = db.query(true, TABLE_NAME, allNoteColumns, COLUMN_ID + "=" + "'" + id + "'", null,
 					null, null, null, null);
 
 			if ((cursor != null) && (cursor.getCount() != 0)) {

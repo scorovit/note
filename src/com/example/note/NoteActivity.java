@@ -6,18 +6,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class NoteActivity extends Activity implements OnClickListener {
 
 	private EditText mNameNoteEditText, mDescriptionNoteEditText;
 	private Button mDeleteNoteButton, mSaveNoteButton;
+	private String id;
+	private SQLDataSourceNote mSqlDataSourceNote;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_note);
+		
+		mSqlDataSourceNote = new SQLDataSourceNote();
 		
 		mNameNoteEditText = (EditText) this.findViewById(R.id.nameNoteEditText);
 		mDescriptionNoteEditText = (EditText) this.findViewById(R.id.descriptionNoteEditText);
@@ -31,11 +34,18 @@ public class NoteActivity extends Activity implements OnClickListener {
 		if (extras == null) {
 			return;
 		}
+
+		id = extras.getString("ID_NOTE");
 		
-		
-		
-//		((TextView) this.findViewById(R.id.captionTextView)).setText(extras.getString("NAME_NOTE"));
-		
+		if (id != null) {
+			try {
+				Note note = mSqlDataSourceNote.getNote(id);
+				mNameNoteEditText.setText(note.name);
+				mDescriptionNoteEditText.setText(note.description);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -54,8 +64,7 @@ public class NoteActivity extends Activity implements OnClickListener {
 			}
 			
 			String descriptionNote = mDescriptionNoteEditText.getText().toString().trim();
-			SQLDataSourceNote sqlDataSourceNote = new SQLDataSourceNote();
-			if (sqlDataSourceNote.addNote(nameNote, descriptionNote)) {
+			if (mSqlDataSourceNote.addNote(nameNote, descriptionNote)) {
 				Toast.makeText(NoteActivity.this, "Note added in DB", Toast.LENGTH_LONG).show();
 			}
 			

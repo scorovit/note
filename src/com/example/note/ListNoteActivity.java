@@ -1,5 +1,7 @@
 package com.example.note;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,50 +9,51 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class ListNoteActivity extends Activity {
 
 	private ListView mNoteListView;
-	private Button mAddNoteButton;
+	private ImageButton mAddNoteButton;
+	private SQLDataSourceNote mSqlDataSourceNote;
+	private ArrayList<Note> mNoteList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_note);
-		
-		final String[] names = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис",
-			      "Костя", "Игорь", "Анна", "Денис", "Андрей" };
-		
-		mNoteListView = (ListView) this.findViewById(R.id.noteListView);
-		mAddNoteButton = (Button) this.findViewById(R.id.addNoteButton);
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		        android.R.layout.simple_list_item_1, names);
 
-		    // присваиваем адаптер списку
-		mNoteListView.setAdapter(adapter);
-		
+		mNoteListView = (ListView) this.findViewById(R.id.noteListView);
+		mAddNoteButton = (ImageButton) this.findViewById(R.id.addNoteButton);
+
 		mNoteListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getBaseContext(), NoteActivity.class);
-				intent.putExtra("NAME_NOTE", names[position]);
+				intent.putExtra("ID_NOTE", String.valueOf(mNoteList.get(position).id));
 				startActivity(intent);
 			}
 		});
-		
+
 		mAddNoteButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getBaseContext(), NoteActivity.class);
-				startActivity(intent);			
+				startActivity(intent);
 			}
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mSqlDataSourceNote = new SQLDataSourceNote();
+		mNoteList = (ArrayList<Note>) mSqlDataSourceNote.getAllNotes();
+		NoteListAdapter mAdapter = new NoteListAdapter(this, R.layout.note_listing_row, mNoteList);
+		mNoteListView.setAdapter(mAdapter);
 	}
 
 }
